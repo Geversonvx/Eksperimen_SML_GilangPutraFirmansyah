@@ -1,10 +1,14 @@
 import pandas as pd
 import mlflow
 import mlflow.sklearn
-
+import dagshub
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
+dagshub.init(
+    repo_owner="Geversonvx",
+    repo_name="Eksperimen_SML_GilangPutraFirmansyah",
+    mlflow=True,
+)
 
 def main():
     # =========================
