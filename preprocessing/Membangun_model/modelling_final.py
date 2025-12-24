@@ -2,10 +2,15 @@ import pandas as pd
 import mlflow
 import mlflow.sklearn
 import joblib
+import dagshub
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 import os
-
+dagshub.init(
+    repo_owner="Geversonvx",
+    repo_name="Eksperimen_SML_GilangPutraFirmansyah",
+    mlflow=True,
+)
 # =============================
 # Load data preprocessing
 # =============================
@@ -69,3 +74,4 @@ with mlflow.start_run(run_name="RandomForest_Final_Model"):
     mlflow.log_artifact("artifacts_extra/random_forest_final_model.joblib")
 
     print("Training & logging ke DagsHub selesai")
+
