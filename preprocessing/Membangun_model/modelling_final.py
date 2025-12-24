@@ -58,8 +58,12 @@ with mlflow.start_run(run_name="RandomForest_Final_Model"):
     os.makedirs("artifacts_extra", exist_ok=True)
     joblib.dump(model, "artifacts_extra/random_forest_final_model.joblib")
 
-    # LOG MODEL KE MLFLOW
-    mlflow.sklearn.log_model(model, "model")
+    mlflow.sklearn.log_model(
+    sk_model=model,
+    artifact_path="model",
+    registered_model_name="CreditCardDefault_RF_Model"
+)
+
 
     # ===== ARTEFAK TAMBAHAN (MINIMAL 2) =====
 
@@ -74,4 +78,5 @@ with mlflow.start_run(run_name="RandomForest_Final_Model"):
     mlflow.log_artifact("artifacts_extra/random_forest_final_model.joblib")
 
     print("Training & logging ke DagsHub selesai")
+
 
