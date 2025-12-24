@@ -49,6 +49,6 @@ def preprocess_data(
 
 if __name__ == "__main__":
     preprocess_data(
-        input_path="../CreditCardDefaultDataset_raw/default of credit card clients.xls",
+        input_path="CreditCardDefaultDataset_raw/default of credit card clients.xls",
         output_dir="./CreditCardDefaultDataset_preprocessing",
     )
