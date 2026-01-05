@@ -50,4 +50,3 @@ if __name__ == "__main__":
         "data_raw/default_of_credit_card_clients.xls",
         "CreditCardDefaultDataset_preprocessing"
     )
-)
