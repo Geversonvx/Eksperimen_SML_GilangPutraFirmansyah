@@ -1,13 +1,13 @@
 name: Train Model with MLflow (DagsHub)
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  train-model:
+  train:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,13 +23,8 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run preprocessing
-      run: |
-        python preprocessing/automate_gilangputrafirmansyah.py
-
     - name: Train model with MLflow (DagsHub)
       env:
         MLFLOW_TRACKING_URI: https://token:${{ secrets.DAGSHUB_TOKEN }}@dagshub.com/Geversonvx/Eksperimen_SML_GilangPutraFirmansyah.mlflow
       run: |
         python Membangun_model/modelling_final.py
-
