@@ -31,7 +31,7 @@ jobs:
       run: |
         echo "MLFLOW_TRACKING_URI=https://dagshub.com/Geversonvx/Eksperimen_SML_GilangPutraFirmansyah.mlflow" >> $GITHUB_ENV
         echo "MLFLOW_TRACKING_USERNAME=${{ secrets.Geversonvx }}" >> $GITHUB_ENV
-        echo "MLFLOW_TRACKING_PASSWORD=${{ secrets.fb5b1af0998d386db67eb8f63631dc0c20a34d72 }}" >> $GITHUB_ENV
+        echo "MLFLOW_TRACKING_PASSWORD=${{ secrets.46f1399377e1e4f9015224137ad3a70c7b99f07c }}" >> $GITHUB_ENV
 
     # =========================
     # Run preprocessing
