@@ -1,13 +1,16 @@
-name: ML Pipeline Credit Card Default
+name: Automated Preprocessing Credit Card Default
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    paths:
+      - data_raw/**
+      - preprocessing/automate_gilangputrafirmansyah.py
+
+permissions:
+  contents: write
 
 jobs:
-  train-model:
+  preprocessing:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,22 +24,16 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # =========================
-    # Run preprocessing
-    # =========================
-    - name: Run preprocessing
+    - name: Run preprocessing script
       run: |
         python preprocessing/automate_gilangputrafirmansyah.py
 
-    # =========================
-    # Train model with MLflow (DagsHub)
-    # =========================
-    - name: Train model with MLflow (DagsHub)
-      env:
-        MLFLOW_TRACKING_URI: https://dagshub.com/Geversonvx/Eksperimen_SML_GilangPutraFirmansyah.mlflow
-        MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
+    - name: Commit preprocessing result
       run: |
-        python Membangun_model/modelling_final.py
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git add CreditCardDefaultDataset_preprocessing/*
+        git commit -m "Auto-update preprocessed dataset" || echo "No changes to commit"
+        git push
