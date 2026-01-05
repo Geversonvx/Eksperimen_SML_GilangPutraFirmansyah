@@ -25,7 +25,9 @@ jobs:
 
     - name: Train model with MLflow (DagsHub)
       env:
-        DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_USER_TOKEN }}
+        DAGSHUB_USER: ${{ secrets.DAGSHUB_USER }}
+        DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         MLFLOW_TRACKING_URI: https://dagshub.com/Geversonvx/Eksperimen_SML_GilangPutraFirmansyah.mlflow
       run: |
         python Membangun_model/modelling_final.py
+
