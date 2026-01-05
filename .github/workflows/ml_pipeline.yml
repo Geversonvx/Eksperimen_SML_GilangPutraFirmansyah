@@ -45,4 +45,4 @@ jobs:
     # =========================
     - name: Run model training
       run: |
-        python preprocessing/Membangun_model/modelling_final.py
+        python Membangun_model/modelling_final.py
