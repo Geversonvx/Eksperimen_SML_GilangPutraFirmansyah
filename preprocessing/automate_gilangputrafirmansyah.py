@@ -47,6 +47,7 @@ def preprocess_data(input_path, output_dir, test_size=0.2, random_state=42):
 
 if __name__ == "__main__":
     preprocess_data(
-        "CreditCardDefaultDataset_raw/default of credit card clients.xls",
+        "data_raw/default_of_credit_card_clients.xls",
         "CreditCardDefaultDataset_preprocessing"
     )
+)
