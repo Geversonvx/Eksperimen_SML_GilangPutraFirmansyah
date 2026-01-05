@@ -25,19 +25,6 @@ jobs:
         pip install -r requirements.txt
 
     # =========================
-    # Set DagsHub Credentials
-    # =========================
-    - name: Train model with MLflow (DagsHub)
-      env:
-        MLFLOW_TRACKING_URI: https://dagshub.com/Geversonvx/Eksperimen_SML_GilangPutraFirmansyah.mlflow
-        MLFLOW_TRACKING_USERNAME: token
-        MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
-      run: |
-        python Membangun_model/modelling_final.py
-
-
-
-    # =========================
     # Run preprocessing
     # =========================
     - name: Run preprocessing
@@ -45,8 +32,12 @@ jobs:
         python preprocessing/automate_gilangputrafirmansyah.py
 
     # =========================
-    # Train & register model
+    # Train model with MLflow (DagsHub)
     # =========================
-    - name: Run model training
+    - name: Train model with MLflow (DagsHub)
+      env:
+        MLFLOW_TRACKING_URI: https://dagshub.com/Geversonvx/Eksperimen_SML_GilangPutraFirmansyah.mlflow
+        MLFLOW_TRACKING_USERNAME: token
+        MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
       run: |
         python Membangun_model/modelling_final.py
