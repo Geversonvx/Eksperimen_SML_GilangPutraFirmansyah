@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 # =============================
 # SET MLFLOW (AMBIL DARI ENV)
 # =============================
-mlflow.set_tracking_uri(os.environ["MLFLOW_TRACKING_URI"])
+mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI"))
 mlflow.set_experiment("CreditCard_Default_RF_DagsHub")
 
 # =============================
@@ -57,3 +57,4 @@ with mlflow.start_run(run_name="RandomForest_Final_Model"):
     mlflow.log_artifact("artifacts_extra/random_forest_final_model.joblib")
 
     print("Training & logging ke DagsHub selesai")
+
