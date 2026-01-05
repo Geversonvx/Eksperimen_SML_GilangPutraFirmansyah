@@ -12,3 +12,11 @@ Langkah preprocessing:
 File `creditcard_preprocessed_full.csv` merupakan
 hasil akhir preprocessing yang digunakan sebagai
 dasar eksperimen selanjutnya.
+## Automated Preprocessing
+
+Preprocessing dataset dilakukan secara otomatis menggunakan script
+`automate_gilangputrafirmansyah.py`.
+
+Workflow GitHub Actions akan berjalan otomatis setiap terdapat perubahan
+pada data mentah atau script preprocessing, dan menghasilkan dataset siap latih
+di folder `CreditCardDefaultDataset_preprocessing`.
