@@ -7,6 +7,12 @@ from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 import os
 
 # =============================
+# SET MLFLOW DAGSHUB (WAJIB)
+# =============================
+mlflow.set_tracking_uri(os.environ["MLFLOW_TRACKING_URI"])
+mlflow.set_experiment("CreditCard_Default_RF_DagsHub")
+
+# =============================
 # Load data preprocessing
 # =============================
 X_train = pd.read_csv("CreditCardDefaultDataset_preprocessing/X_train.csv")
@@ -69,3 +75,4 @@ with mlflow.start_run(run_name="RandomForest_Final_Model"):
     mlflow.log_artifact("artifacts_extra/random_forest_final_model.joblib")
 
     print("Training & logging ke DagsHub selesai")
+
