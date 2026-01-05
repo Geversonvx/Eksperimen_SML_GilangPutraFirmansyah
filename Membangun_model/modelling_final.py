@@ -7,11 +7,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 
 # =============================
-# SET MLFLOW DAGSHUB (WAJIB)
+# SET MLFLOW DAGSHUB
 # =============================
 mlflow.set_tracking_uri(os.environ["MLFLOW_TRACKING_URI"])
-
-# ⚠️ JANGAN DUPLIKASI
 mlflow.set_experiment("CreditCard_Default_RF_DagsHub")
 
 # =============================
@@ -35,7 +33,6 @@ with mlflow.start_run(run_name="RandomForest_Final_Model"):
     )
 
     model.fit(X_train, y_train)
-
     y_pred = model.predict(X_test)
 
     acc = accuracy_score(y_test, y_pred)
@@ -43,21 +40,19 @@ with mlflow.start_run(run_name="RandomForest_Final_Model"):
 
     mlflow.log_param("n_estimators", 200)
     mlflow.log_param("max_depth", 10)
-
     mlflow.log_metric("accuracy", acc)
     mlflow.log_metric("f1_score", f1)
 
-    # Simpan model
     os.makedirs("artifacts_extra", exist_ok=True)
     joblib.dump(model, "artifacts_extra/random_forest_final_model.joblib")
 
     mlflow.sklearn.log_model(model, "model")
 
-    # Confusion Matrix
     cm = confusion_matrix(y_test, y_pred)
     pd.DataFrame(cm).to_csv(
         "artifacts_extra/confusion_matrix.csv", index=False
     )
+
     mlflow.log_artifact("artifacts_extra/confusion_matrix.csv")
     mlflow.log_artifact("artifacts_extra/random_forest_final_model.joblib")
 
