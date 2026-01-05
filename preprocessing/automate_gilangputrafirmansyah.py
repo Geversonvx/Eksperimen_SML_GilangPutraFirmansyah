@@ -1,26 +1,22 @@
 import pandas as pd
 import os
 import joblib
-
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
 
 
-def preprocess_data(
-    input_path: str, output_dir: str, test_size: float = 0.2, random_state: int = 42
-):
-   df = pd.read_excel(input_path, skiprows=1)
+def preprocess_data(input_path, output_dir, test_size=0.2, random_state=42):
+    df = pd.read_excel(input_path, skiprows=1)
 
-df = df.drop(columns=["ID"])
+    df.drop(columns=["ID"], inplace=True)
 
-df.rename(
-    columns={"default payment next month": "default.payment.next.month"},
-    inplace=True
-)
+    df.rename(
+        columns={"default payment next month": "default.payment.next.month"},
+        inplace=True
+    )
 
-target_col = "default.payment.next.month"
-
+    target_col = "default.payment.next.month"
     X = df.drop(columns=[target_col])
     y = df[target_col]
 
@@ -29,21 +25,17 @@ target_col = "default.payment.next.month"
     )
 
     imputer = SimpleImputer(strategy="median")
-    X_train_imputed = imputer.fit_transform(X_train)
-    X_test_imputed = imputer.transform(X_test)
+    X_train = imputer.fit_transform(X_train)
+    X_test = imputer.transform(X_test)
 
     scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train_imputed)
-    X_test_scaled = scaler.transform(X_test_imputed)
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test)
 
     os.makedirs(output_dir, exist_ok=True)
 
-    pd.DataFrame(X_train_scaled, columns=X.columns).to_csv(
-        f"{output_dir}/X_train.csv", index=False
-    )
-    pd.DataFrame(X_test_scaled, columns=X.columns).to_csv(
-        f"{output_dir}/X_test.csv", index=False
-    )
+    pd.DataFrame(X_train, columns=X.columns).to_csv(f"{output_dir}/X_train.csv", index=False)
+    pd.DataFrame(X_test, columns=X.columns).to_csv(f"{output_dir}/X_test.csv", index=False)
     y_train.to_csv(f"{output_dir}/y_train.csv", index=False)
     y_test.to_csv(f"{output_dir}/y_test.csv", index=False)
 
@@ -55,6 +47,6 @@ target_col = "default.payment.next.month"
 
 if __name__ == "__main__":
     preprocess_data(
-        input_path="CreditCardDefaultDataset_raw/default of credit card clients.xls",
-        output_dir="./CreditCardDefaultDataset_preprocessing",
+        "CreditCardDefaultDataset_raw/default of credit card clients.xls",
+        "CreditCardDefaultDataset_preprocessing"
     )
