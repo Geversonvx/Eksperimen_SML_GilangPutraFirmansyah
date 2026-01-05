@@ -10,11 +10,17 @@ from sklearn.impute import SimpleImputer
 def preprocess_data(
     input_path: str, output_dir: str, test_size: float = 0.2, random_state: int = 42
 ):
-    df = pd.read_excel(input_path, sheet_name="Data", skiprows=1, engine="xlrd")
+   df = pd.read_excel(input_path, skiprows=1)
 
-    df = df.drop(columns=["ID"])
+df = df.drop(columns=["ID"])
 
-    target_col = "default payment next month"
+df.rename(
+    columns={"default payment next month": "default.payment.next.month"},
+    inplace=True
+)
+
+target_col = "default.payment.next.month"
+
     X = df.drop(columns=[target_col])
     y = df[target_col]
 
