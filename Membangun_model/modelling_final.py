@@ -7,13 +7,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 
 # =============================
-# SET MLFLOW DAGSHUB
+# SET MLFLOW (AMBIL DARI ENV)
 # =============================
 mlflow.set_tracking_uri(os.environ["MLFLOW_TRACKING_URI"])
 mlflow.set_experiment("CreditCard_Default_RF_DagsHub")
 
 # =============================
-# Load data preprocessing
+# LOAD DATA
 # =============================
 X_train = pd.read_csv("CreditCardDefaultDataset_preprocessing/X_train.csv")
 X_test = pd.read_csv("CreditCardDefaultDataset_preprocessing/X_test.csv")
