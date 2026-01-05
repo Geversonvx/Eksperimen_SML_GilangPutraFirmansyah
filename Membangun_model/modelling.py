@@ -22,7 +22,10 @@ def main():
     # =========================
     # Aktifkan MLflow autolog
     # =========================
-    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    mlflow.set_tracking_uri(
+    os.getenv("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
+    )
+
     mlflow.set_experiment("Credit_Card_Default_Basic_Model")
 
     mlflow.sklearn.autolog()
